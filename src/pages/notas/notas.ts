@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
 import { NotaInterface } from "../../interfaces/notainterface";
 import { Webservice } from "../../providers/webservice";
+import { DetalhePage } from "../detalhe/detalhe";
 
 @Component({
   selector: 'page-notas',
@@ -14,7 +16,9 @@ export class NotasPage {
   public nota: NotaInterface = { Title: '', Body: '' };
   public listaNotas: NotaInterface[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public webservice: Webservice) { }
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public webservice: Webservice) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotasPage');
@@ -42,6 +46,10 @@ export class NotasPage {
     this.nota = { Title: '', Body: '' };
     this.abreForm = false;
     this.webservice.addNota(nota).then(data => this.listaNotas.push(data));
+  }
+
+  abreDetalhe(nota: NotaInterface) {
+    this.navCtrl.push(DetalhePage,{nota:nota});
   }
 
 }

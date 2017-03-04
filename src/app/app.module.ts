@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NotasPage } from "../pages/notas/notas";
 import { Webservice } from "../providers/webservice";
+import { DetalhePage } from "../pages/detalhe/detalhe";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { Webservice } from "../providers/webservice";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DetalhePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -27,7 +29,8 @@ import { Webservice } from "../providers/webservice";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DetalhePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Webservice]
 })

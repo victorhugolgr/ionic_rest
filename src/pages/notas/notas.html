@@ -32,7 +32,7 @@
 
   <ion-list [hidden]="abreForm">
     <ion-item-sliding *ngFor="let item of listaNotas">
-      <button ion-item>
+      <button ion-item (click)="abreDetalhe(item)">
         <h2>{{item.Title}}</h2>
         <p>{{item.Body}}</p>
       </button>
