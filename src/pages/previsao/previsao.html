@@ -22,4 +22,13 @@
       {{notaPrevisao.Body}}
     </ion-card-content>
   </ion-card>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Cidade</ion-label>
+    <ion-input type="text" [(ngModel)]="cidade" placeholder="digite a Cidade"></ion-input>
+  </ion-item>
+  <p>
+      <button ion-button color="primary" (click)="buscaPrevisao()"  block>Pesquisar</button>
+      <button ion-button color="light" (click)="salvaNota()"  block>Salvar Previsão</button>
+    </p>
 </ion-content>

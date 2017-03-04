@@ -28,6 +28,10 @@ export class NotasPage {
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
     this.webservice.getNotas().then(data => this.listaNotas = data);
+    if (this.navParams.get('nota')) {
+      this.abreFormulario();
+      this.nota = this.navParams.get('nota');
+    }
   }
 
   abreFormulario() {
@@ -70,20 +74,20 @@ export class NotasPage {
   atualizaNota(nota: NotaInterface) {
     this.abreForm = false;
     for (let k in this.listaNotas) {
-      if(this.listaNotas[k].Id == nota.Id){
+      if (this.listaNotas[k].Id == nota.Id) {
         this.listaNotas[k] = nota;
       }
     }
   }
 
-  deletarNota(nota: NotaInterface, listaOpcoes: ItemSliding){
+  deletarNota(nota: NotaInterface, listaOpcoes: ItemSliding) {
     this.webservice.deleteNota(nota).then(data => this.removeNota(data));
   }
 
   removeNota(nota: NotaInterface) {
     for (let k in this.listaNotas) {
-      if(this.listaNotas[k].Id == nota.Id){
-        this.listaNotas.splice(parseInt(k),1);
+      if (this.listaNotas[k].Id == nota.Id) {
+        this.listaNotas.splice(parseInt(k), 1);
       }
     }
   }
