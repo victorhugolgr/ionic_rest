@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ItemSliding } from 'ionic-angular';
 
 import { NotaInterface } from "../../interfaces/notainterface";
 import { Webservice } from "../../providers/webservice";
@@ -15,6 +15,7 @@ export class NotasPage {
   public tituloPagina: string = "Notas";
   public nota: NotaInterface = { Title: '', Body: '' };
   public listaNotas: NotaInterface[];
+  public editando: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,6 +33,8 @@ export class NotasPage {
   abreFormulario() {
     console.log('Abre Formulário');
     this.abreForm = !this.abreForm;
+    this.nota = { Title: '', Body: '' };
+    this.editando = false;
 
     if (this.abreForm) {
       this.tituloPagina = "Adicionar Nota";
@@ -49,7 +52,27 @@ export class NotasPage {
   }
 
   abreDetalhe(nota: NotaInterface) {
-    this.navCtrl.push(DetalhePage,{nota:nota});
+    this.navCtrl.push(DetalhePage, { nota: nota });
   }
 
+  abreEditarNota(nota: NotaInterface, listaOpcoes: ItemSliding) {
+    this.editando = true;
+    listaOpcoes.close();
+    this.abreForm = true;
+    this.tituloPagina = "Editar Nota";
+    this.nota = nota;
+  }
+
+  editarNota() {
+    this.webservice.editNota(this.nota).then(data => this.atualizaNota(this.nota));
+  }
+
+  atualizaNota(nota: NotaInterface) {
+    this.abreForm = false;
+    for (let k in this.listaNotas) {
+      if(this.listaNotas[k].Id == nota.Id){
+        this.listaNotas[k] = nota;
+      }
+    }
+  }
 }

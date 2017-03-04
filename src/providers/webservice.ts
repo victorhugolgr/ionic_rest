@@ -13,21 +13,27 @@ import { NotaInterface } from "../interfaces/notainterface";
 @Injectable()
 export class Webservice {
 
-  private url:string = 'http://devmedianotesapi.azurewebsites.net/';
-  private headers = new Headers({'Accept':'application/json'});
+  private url: string = 'http://devmedianotesapi.azurewebsites.net/';
+  private headers = new Headers({ 'Accept': 'application/json' });
 
   constructor(public http: Http) {
     console.log('Hello Webservice Provider');
   }
 
-  addNota(nota: NotaInterface){
-    return this.http.post(this.url + 'api/notes', nota, {headers:this.headers})
+  addNota(nota: NotaInterface) {
+    return this.http.post(this.url + 'api/notes', nota, { headers: this.headers })
       .toPromise()
       .then(res => res.json());
   }
 
-  getNotas(){
+  getNotas() {
     return this.http.get(this.url + 'api/notes')
+      .toPromise()
+      .then(res => res.json());
+  }
+
+  editNota(nota: NotaInterface) {
+    return this.http.put(this.url + 'api/notes/' + nota.Id, nota, { headers: this.headers })
       .toPromise()
       .then(res => res.json());
   }
