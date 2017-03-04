@@ -37,4 +37,10 @@ export class Webservice {
       .toPromise()
       .then(res => res.json());
   }
+
+  deleteNota(nota: NotaInterface) {
+    return this.http.delete(this.url + 'api/notes/' + nota.Id, { headers: this.headers })
+      .toPromise()
+      .then(res => res.json());
+  }
 }

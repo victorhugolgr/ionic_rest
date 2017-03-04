@@ -75,4 +75,16 @@ export class NotasPage {
       }
     }
   }
+
+  deletarNota(nota: NotaInterface, listaOpcoes: ItemSliding){
+    this.webservice.deleteNota(nota).then(data => this.removeNota(data));
+  }
+
+  removeNota(nota: NotaInterface) {
+    for (let k in this.listaNotas) {
+      if(this.listaNotas[k].Id == nota.Id){
+        this.listaNotas.splice(parseInt(k),1);
+      }
+    }
+  }
 }
