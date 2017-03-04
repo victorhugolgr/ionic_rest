@@ -26,4 +26,9 @@ export class Webservice {
       .then(res => res.json());
   }
 
+  getNotas(){
+    return this.http.get(this.url + 'api/notes')
+      .toPromise()
+      .then(res => res.json());
+  }
 }

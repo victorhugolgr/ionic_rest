@@ -17,7 +17,7 @@
 
     <ion-item>
       <ion-label color="primary" stacked>Título</ion-label>
-      <ion-input type="text" [(ngModel)]="nota.Title"  placeholder="Título da nota"></ion-input>
+      <ion-input type="text" [(ngModel)]="nota.Title" placeholder="Título da nota"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>Descrição</ion-label>
@@ -25,9 +25,28 @@
     </ion-item>
 
     <p>
-      <button ion-button color ="primary" (click)="adicionaNota()" block>Adicionar</button>
+      <button ion-button color="primary" (click)="adicionaNota()" block>Adicionar</button>
     </p>
 
   </div>
+
+  <ion-list [hidden]="abreForm">
+    <ion-item-sliding *ngFor="let item of listaNotas">
+      <button ion-item>
+        <h2>{{item.Title}}</h2>
+        <p>{{item.Body}}</p>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary">
+        <ion-icon name="create"></ion-icon>
+        Editar
+      </button>
+      <button ion-button color="danger">
+        <ion-icon name="trash"></ion-icon>
+        Deletar
+      </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
