@@ -14,6 +14,7 @@ import { NotaInterface } from "../interfaces/notainterface";
 export class Webservice {
 
   private url: string = 'http://devmedianotesapi.azurewebsites.net/';
+  private urlPrevisao: string = 'http://api.openweathermap.org/data/2.5/weather?APPID=039c5e7d18e2e1149d19a7856bacd1e0&lang=pt&units=metric&q=';
   private headers = new Headers({ 'Accept': 'application/json' });
 
   constructor(public http: Http) {
@@ -40,6 +41,12 @@ export class Webservice {
 
   deleteNota(nota: NotaInterface) {
     return this.http.delete(this.url + 'api/notes/' + nota.Id, { headers: this.headers })
+      .toPromise()
+      .then(res => res.json());
+  }
+
+  getPrevisao(cidade: string) {
+    return this.http.get(this.urlPrevisao + cidade)
       .toPromise()
       .then(res => res.json());
   }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Webservice } from "../../providers/webservice";
+import { NotaInterface } from "../../interfaces/notainterface";
 
 /*
   Generated class for the Previsao page.
@@ -13,10 +15,19 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PrevisaoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public cidade:string = 'marituba';
+  public notaPrevisao: NotaInterface = {Title:'', Body:''};
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public webService: Webservice) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PrevisaoPage');
+    this.webService.getPrevisao(this.cidade).then(data => {
+      console.log(data);
+      this.notaPrevisao.Title = 'Previsão em ' + data.name;
+      this.notaPrevisao.Body = 'Temperatura em ' + data.main.temp + ' e ' + data.weather[0].description;
+    });
   }
 
 }
