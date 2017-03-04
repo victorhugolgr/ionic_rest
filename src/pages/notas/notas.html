@@ -17,15 +17,15 @@
 
     <ion-item>
       <ion-label color="primary" stacked>Título</ion-label>
-      <ion-input type="text" placeholder="Título da nota"></ion-input>
+      <ion-input type="text" [(ngModel)]="nota.Title"  placeholder="Título da nota"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>Descrição</ion-label>
-      <ion-input type="text" placeholder="Descrição da nota"></ion-input>
+      <ion-input type="text" [(ngModel)]="nota.Body" placeholder="Descrição da nota"></ion-input>
     </ion-item>
 
     <p>
-      <button ion-button color ="primary" block>Adicionar</button>
+      <button ion-button color ="primary" (click)="adicionaNota()" block>Adicionar</button>
     </p>
 
   </div>
